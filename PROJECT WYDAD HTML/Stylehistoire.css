@@ -1,0 +1,177 @@
+*{
+   font-family: "Barlow", sans-serif;
+   background-color: red;
+}
+/*<h1> avec la classe tit : poids de police normal, style de police normal, couleur noire, texte centré, marge inférieure de 9%, et marge supérieure de 90px */
+.tit h1{
+    font-weight: 400px;
+    font-style: normal;
+    color: black;
+    text-align: center;
+    margin-bottom: 9%;
+    margin-top: 90px;
+}
+/*classe .par,la couleur du texte blanc, l'alignement à gauche, la hauteur de ligne, le poids de police, le style de police, l'espacement des lettres, et les marges à droite et en bas*/
+.par{
+   color: white;
+    text-align: left;
+    line-height: 30px;
+    font-weight: 100px;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-right: 550px;
+    margin-bottom: 100px;
+    
+}
+/*.logo, lui permettant de flotter à droite de son conteneur, avec une position relative par rapport à son emplacement habituel dans le flux, une marge de 150 pixels à droite et de 50 pixels en haut, et une largeur maximale de 300 pixels*/
+
+ .logo{
+    
+    float: right;
+    position: relative;
+    margin-right: 150px;
+    margin-top: 50px;
+    max-width: 300px;
+ }
+
+ /*descr, y compris la couleur du texte noir, un poids de police inhabituellement élevé (950 pixels), un style de police normal, et une marge de -500 pixels à droite, ce qui le décale vers la gauche de son conteneur*/
+ .descr{
+   color: black;
+    font-weight: 950px;
+    font-style: normal;
+    margin-right: -500px;
+    
+    
+ }
+
+ 
+ .logo1{
+    
+    float: left;
+    position: relative;
+    margin-left: 30px;
+    width: 100%;
+    margin-top: 50px;
+ }
+
+ .descr1{
+   color: black;
+   font-weight: 950px;
+    font-style: normal;
+    margin-right: -500px;
+  
+ }
+
+
+ .par1{
+   color: white;
+    position: absolute;
+    text-align:initial;
+    line-height: 30px;
+    font-weight: 300px;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-left: 450px;
+    margin-right: 85px;
+    margin-bottom: 700px;
+ }
+
+ .par2{
+   color: white;
+    text-align: left;
+    line-height: 30px;
+    font-weight: 100px;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-right: 450px;
+    margin-top: 650px;
+    margin-bottom: 100px;
+}
+ .logo2{
+    
+    float: right;
+    position: relative;
+    margin-right: 250px;
+    margin-top: 300px;
+    max-width: 300px;
+ }
+
+ .descr2{
+   color: black;
+   font-weight: 950px;
+    font-style: normal;
+    margin-right: -500px;
+ }
+
+ .logo3{
+    
+    float: left;
+    position: relative;
+    margin-left: 30px;
+    width: 100%;
+    margin-top: 50px;
+ }
+
+ .descr3{
+   color: black;
+   font-weight: 950px;
+    font-style: normal;
+    margin-right: -500px;
+ }
+
+
+ .par3{
+   color: white;
+    position: absolute;
+    text-align:initial;
+    line-height: 30px;
+    font-weight: 300px;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-left: 550px;
+    margin-right: 85px;
+    margin-bottom: 900px;
+ }
+
+ .par4{
+   color: white;
+    text-align: left;
+    line-height: 30px;
+    font-weight: 100px;
+    font-style: normal;
+    letter-spacing: 2px;
+    margin-right: 450px;
+    margin-top: 850px;
+    margin-bottom: 100px;
+}
+ .logo4{
+    
+    float: right;
+    position: relative;
+    margin-right: 550px;
+    margin-top: 300px;
+    width: 10px;
+    
+ }
+
+ .descr4{
+   color: black;
+   font-weight: 950px;
+    font-style: normal;
+    margin-right: -500px;
+    margin-left: 70px;
+ }
+.par5{
+   color: white;
+    line-height: 30px;
+    font-weight: 300px;
+    font-style: normal;
+    letter-spacing: 2px;
+}
+.par6{
+   color: white;
+    line-height: 30px;
+    font-weight: 300px;
+    font-style: normal;
+    letter-spacing: 2px;
+}
