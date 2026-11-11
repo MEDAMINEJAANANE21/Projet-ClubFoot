@@ -1,0 +1,14 @@
+.login {
+  min-height: 70vh;
+
+  &__card {
+    max-width: 420px;
+    margin-inline: auto;
+    gap: 20px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
+}

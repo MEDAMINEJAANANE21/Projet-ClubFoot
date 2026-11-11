@@ -1,0 +1,82 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1 class="page-hero__title">Nous écrire</h1>
+    <p class="page-hero__lead">Un bug sur le site, une question sur la boutique ou une idée ? Écrivez à l'équipe du site.</p>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container form-layout">
+    <aside class="form-aside">
+      <div class="form-aside__block">
+        <h2>Le club</h2>
+        <p>Stade Mohammed V<br>Casablanca, Maroc</p>
+      </div>
+      <div class="form-aside__block">
+        <h2>Bon à savoir</h2>
+        <p>Ce site est un projet étudiant : les messages arrivent dans l'espace admin du site, pas au club.</p>
+      </div>
+    </aside>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <fieldset>
+        <legend>Votre message</legend>
+
+        <div class="field">
+          <label for="name">Nom</label>
+          <input id="name" formControlName="name" type="text" autocomplete="name"
+                 [attr.aria-invalid]="isInvalid(form.controls.name)" aria-describedby="name-error">
+          @if (errorOf(form.controls.name); as message) {
+            <p class="field__error" id="name-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" formControlName="email" type="email" autocomplete="email" placeholder="nom@domaine.com"
+                 [attr.aria-invalid]="isInvalid(form.controls.email)" aria-describedby="email-error">
+          @if (errorOf(form.controls.email); as message) {
+            <p class="field__error" id="email-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field field--full">
+          <label for="subject">Sujet</label>
+          <select id="subject" formControlName="subject"
+                  [attr.aria-invalid]="isInvalid(form.controls.subject)" aria-describedby="subject-error">
+            <option value="">Choisir…</option>
+            @for (subject of subjects; track subject[0]) {
+              <option [value]="subject[0]">{{ subject[1] }}</option>
+            }
+          </select>
+          @if (errorOf(form.controls.subject); as message) {
+            <p class="field__error" id="subject-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field field--full">
+          <label for="message">Message</label>
+          <textarea id="message" formControlName="message" rows="6"
+                    [attr.aria-invalid]="isInvalid(form.controls.message)"
+                    aria-describedby="message-hint message-error"></textarea>
+          <p class="field__hint" id="message-hint">
+            {{ messageMinLength }} caractères minimum ({{ form.controls.message.value.length }} saisis).
+          </p>
+          @if (errorOf(form.controls.message); as message) {
+            <p class="field__error" id="message-error">{{ message }}</p>
+          }
+        </div>
+      </fieldset>
+
+      <div class="form__actions">
+        <button class="btn btn--primary btn--block" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Envoi en cours…' : 'Envoyer' }}
+        </button>
+        @if (status(); as currentStatus) {
+          <p [class]="'alert alert--' + currentStatus.type" role="status">{{ currentStatus.message }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</section>

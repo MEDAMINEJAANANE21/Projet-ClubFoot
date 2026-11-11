@@ -1,0 +1,23 @@
+<section class="admin-hero">
+  <div class="container admin-hero__inner">
+    <div>
+      <span class="eyebrow">Espace admin</span>
+      <h1 class="admin-hero__title">Tableau de bord</h1>
+    </div>
+    <div class="admin-hero__user">
+      <span>Connecté : <strong>{{ authStore.username() }}</strong></span>
+      <button class="btn btn--light btn--small" type="button" (click)="logout()">Se déconnecter</button>
+    </div>
+  </div>
+  <nav class="container tabs" aria-label="Sections de l'espace admin">
+    @for (tab of tabs; track tab.path) {
+      <a class="tabs__link" [routerLink]="tab.path" routerLinkActive="tabs__link--active" ariaCurrentWhenActive="page">{{ tab.label }}</a>
+    }
+  </nav>
+</section>
+
+<section class="section section--surface admin-content">
+  <div class="container">
+    <router-outlet />
+  </div>
+</section>

@@ -1,0 +1,151 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Adhésion</span>
+    <h1 class="page-hero__title">Rejoindre le Wydad</h1>
+    <p class="page-hero__lead">
+      Porter le maillot du Wydad est un honneur, le mouiller est un devoir.
+      Remplissez le formulaire pour devenir membre du club.
+    </p>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container form-layout">
+    <aside class="form-aside">
+      <div class="form-aside__block">
+        <h2>Comment ça marche</h2>
+        <ul>
+          <li>Remplissez le formulaire ci-contre.</li>
+          <li>Préparez les pièces demandées : acte de naissance, photo d'identité, CIN.</li>
+          <li>Le club étudie votre demande et vous recontacte.</li>
+        </ul>
+      </div>
+      <div class="form-aside__block">
+        <h2>Bon à savoir</h2>
+        <p>Ce site est un projet étudiant : votre demande est enregistrée dans la base de démonstration, rien de plus.</p>
+      </div>
+    </aside>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <p class="field__hint">Les champs marqués <span class="required">*</span> sont obligatoires.</p>
+
+      <fieldset>
+        <legend>Identité</legend>
+
+        <div class="field field--full">
+          <label for="fullName">Nom complet <span class="required" aria-hidden="true">*</span></label>
+          <input id="fullName" formControlName="fullName" type="text" autocomplete="name"
+                 [attr.aria-invalid]="isInvalid(form.controls.fullName)" aria-describedby="fullName-error">
+          @if (errorOf(form.controls.fullName); as message) {
+            <p class="field__error" id="fullName-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="birthDate">Date de naissance <span class="required" aria-hidden="true">*</span></label>
+          <input id="birthDate" formControlName="birthDate" type="date" autocomplete="bday"
+                 [attr.aria-invalid]="isInvalid(form.controls.birthDate)" aria-describedby="birthDate-error">
+          @if (errorOf(form.controls.birthDate); as message) {
+            <p class="field__error" id="birthDate-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field" role="radiogroup" aria-labelledby="gender-label" aria-describedby="gender-error"
+             [attr.aria-invalid]="isInvalid(form.controls.gender)">
+          <span class="field__label" id="gender-label">Sexe <span class="required" aria-hidden="true">*</span></span>
+          <div class="choices">
+            @for (gender of genders; track gender[0]) {
+              <label class="choice"><input type="radio" formControlName="gender" [value]="gender[0]"> {{ gender[1] }}</label>
+            }
+          </div>
+          @if (errorOf(form.controls.gender); as message) {
+            <p class="field__error" id="gender-error">{{ message }}</p>
+          }
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Coordonnées</legend>
+
+        <div class="field">
+          <label for="email">E-mail <span class="required" aria-hidden="true">*</span></label>
+          <input id="email" formControlName="email" type="email" autocomplete="email" placeholder="nom@domaine.com"
+                 [attr.aria-invalid]="isInvalid(form.controls.email)" aria-describedby="email-error">
+          @if (errorOf(form.controls.email); as message) {
+            <p class="field__error" id="email-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="phone">Téléphone <span class="required" aria-hidden="true">*</span></label>
+          <input id="phone" formControlName="phone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"
+                 [attr.aria-invalid]="isInvalid(form.controls.phone)" aria-describedby="phone-error">
+          @if (errorOf(form.controls.phone); as message) {
+            <p class="field__error" id="phone-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field field--full">
+          <label for="address">Adresse <span class="required" aria-hidden="true">*</span></label>
+          <input id="address" formControlName="address" type="text" autocomplete="street-address"
+                 [attr.aria-invalid]="isInvalid(form.controls.address)" aria-describedby="address-error">
+          @if (errorOf(form.controls.address); as message) {
+            <p class="field__error" id="address-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="country">Pays <span class="required" aria-hidden="true">*</span></label>
+          <select id="country" formControlName="country" autocomplete="country-name"
+                  [attr.aria-invalid]="isInvalid(form.controls.country)" aria-describedby="country-error">
+            <option value="">Choisir…</option>
+            @for (country of countries; track country) {
+              <option [value]="country">{{ country }}</option>
+            }
+          </select>
+          @if (errorOf(form.controls.country); as message) {
+            <p class="field__error" id="country-error">{{ message }}</p>
+          }
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pièces justificatives</legend>
+
+        <div class="field field--full" role="group" aria-labelledby="documents-label" aria-describedby="documents-error"
+             formGroupName="documents" [attr.aria-invalid]="isInvalid(form.controls.documents)">
+          <span class="field__label" id="documents-label">
+            Pièces que vous pouvez fournir <span class="required" aria-hidden="true">*</span>
+          </span>
+          <div class="choices">
+            @for (document of documents; track document[0]) {
+              <label class="choice"><input type="checkbox" [formControlName]="document[0]"> {{ document[1] }}</label>
+            }
+          </div>
+          @if (errorOf(form.controls.documents); as message) {
+            <p class="field__error" id="documents-error">{{ message }}</p>
+          }
+        </div>
+
+        <div class="field field--full">
+          <label class="choice">
+            <input type="checkbox" formControlName="consent" aria-describedby="consent-error">
+            J'accepte que le club utilise ces informations pour traiter ma demande.
+          </label>
+          @if (errorOf(form.controls.consent); as message) {
+            <p class="field__error" id="consent-error">{{ message }}</p>
+          }
+        </div>
+      </fieldset>
+
+      <div class="form__actions">
+        <button class="btn btn--primary btn--block" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Envoi en cours…' : 'Envoyer ma demande' }}
+        </button>
+        @if (status(); as currentStatus) {
+          <p [class]="'alert alert--' + currentStatus.type" role="status">{{ currentStatus.message }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</section>

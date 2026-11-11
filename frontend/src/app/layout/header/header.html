@@ -1,0 +1,47 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" routerLink="/" aria-label="Wydad AC, accueil">
+      <img src="images/logo-wac.png" alt="" width="36" height="44">
+      <span class="brand__name">Wydad <span>AC</span></span>
+    </a>
+
+    <nav class="nav" id="main-nav" aria-label="Navigation principale" [class.nav--open]="isMenuOpen()">
+      <ul class="nav__list">
+        @for (link of links; track link.path) {
+          <li>
+            <a
+              class="nav__link"
+              [routerLink]="link.path"
+              routerLinkActive="nav__link--active"
+              ariaCurrentWhenActive="page"
+              [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+            >{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <button class="cart-button" type="button" [attr.aria-label]="cartLabel()" (click)="cart.open()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="9" cy="20" r="1.5" /><circle cx="18" cy="20" r="1.5" />
+        <path d="M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21.5 8H6.2" />
+      </svg>
+      @if (cart.count() > 0) {
+        <span class="cart-button__count">{{ cart.count() }}</span>
+      }
+    </button>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-controls="main-nav"
+      [attr.aria-expanded]="isMenuOpen()"
+      [attr.aria-label]="isMenuOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
+      (click)="toggleMenu()"
+    >
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+</header>

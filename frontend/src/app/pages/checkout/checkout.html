@@ -1,0 +1,105 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Boutique</span>
+    <h1 class="page-hero__title">Ma commande</h1>
+    <p class="page-hero__lead">Vérifiez votre panier et indiquez votre adresse de livraison.</p>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    @if (confirmedOrder(); as order) {
+      <div class="confirmation" role="status">
+        <span class="eyebrow">Commande enregistrée</span>
+        <h2 class="confirmation__title">Merci, {{ order.customerName }} !</h2>
+        <p>Votre numéro de commande : <strong class="confirmation__reference">{{ order.reference }}</strong></p>
+        <ul class="summary__lines">
+          @for (line of order.lines; track line.productId) {
+            <li><span>{{ line.quantity }} × {{ line.productName }}</span><span>{{ line.subtotal | price }}</span></li>
+          }
+        </ul>
+        <p class="summary__total"><span>Total</span><span>{{ order.total | price }}</span></p>
+        <p class="confirmation__note">Démo : aucun paiement n'est demandé et rien ne sera livré.</p>
+        <a class="btn btn--primary" routerLink="/boutique">Retour à la boutique</a>
+      </div>
+    } @else if (cart.isEmpty()) {
+      <div class="empty-state">
+        <p>Votre panier est vide.</p>
+        <a class="btn btn--primary" routerLink="/boutique">Voir la boutique</a>
+      </div>
+    } @else {
+      <div class="form-layout checkout">
+        <aside class="summary" aria-labelledby="summary-title">
+          <h2 id="summary-title">Récapitulatif</h2>
+          <ul class="summary__lines">
+            @for (item of cart.entries(); track item.productId) {
+              <li><span>{{ item.quantity }} × {{ item.name }}</span><span>{{ item.price * item.quantity | price }}</span></li>
+            }
+          </ul>
+          <p class="summary__total"><span>Total</span><span>{{ cart.total() | price }}</span></p>
+          <button class="btn btn--outline btn--small" type="button" (click)="cart.open()">Modifier le panier</button>
+        </aside>
+
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <fieldset>
+            <legend>Livraison</legend>
+
+            <div class="field field--full">
+              <label for="fullName">Nom complet <span class="required" aria-hidden="true">*</span></label>
+              <input id="fullName" formControlName="fullName" type="text" autocomplete="name"
+                     [attr.aria-invalid]="isInvalid(form.controls.fullName)" aria-describedby="fullName-error">
+              @if (errorOf(form.controls.fullName); as message) {
+                <p class="field__error" id="fullName-error">{{ message }}</p>
+              }
+            </div>
+
+            <div class="field">
+              <label for="email">E-mail <span class="required" aria-hidden="true">*</span></label>
+              <input id="email" formControlName="email" type="email" autocomplete="email" placeholder="nom@domaine.com"
+                     [attr.aria-invalid]="isInvalid(form.controls.email)" aria-describedby="email-error">
+              @if (errorOf(form.controls.email); as message) {
+                <p class="field__error" id="email-error">{{ message }}</p>
+              }
+            </div>
+
+            <div class="field">
+              <label for="phone">Téléphone <span class="required" aria-hidden="true">*</span></label>
+              <input id="phone" formControlName="phone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"
+                     [attr.aria-invalid]="isInvalid(form.controls.phone)" aria-describedby="phone-error">
+              @if (errorOf(form.controls.phone); as message) {
+                <p class="field__error" id="phone-error">{{ message }}</p>
+              }
+            </div>
+
+            <div class="field field--full">
+              <label for="address">Adresse <span class="required" aria-hidden="true">*</span></label>
+              <input id="address" formControlName="address" type="text" autocomplete="street-address"
+                     [attr.aria-invalid]="isInvalid(form.controls.address)" aria-describedby="address-error">
+              @if (errorOf(form.controls.address); as message) {
+                <p class="field__error" id="address-error">{{ message }}</p>
+              }
+            </div>
+
+            <div class="field">
+              <label for="city">Ville <span class="required" aria-hidden="true">*</span></label>
+              <input id="city" formControlName="city" type="text" autocomplete="address-level2"
+                     [attr.aria-invalid]="isInvalid(form.controls.city)" aria-describedby="city-error">
+              @if (errorOf(form.controls.city); as message) {
+                <p class="field__error" id="city-error">{{ message }}</p>
+              }
+            </div>
+          </fieldset>
+
+          <div class="form__actions">
+            <button class="btn btn--primary btn--block" type="submit" [disabled]="isSubmitting()">
+              {{ isSubmitting() ? 'Envoi en cours…' : 'Confirmer la commande · ' + (cart.total() | price) }}
+            </button>
+            @if (status(); as currentStatus) {
+              <p [class]="'alert alert--' + currentStatus.type" role="status">{{ currentStatus.message }}</p>
+            }
+          </div>
+        </form>
+      </div>
+    }
+  </div>
+</section>

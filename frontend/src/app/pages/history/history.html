@@ -1,0 +1,51 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Depuis 1937</span>
+    <h1 class="page-hero__title">Histoire du Wydad AC</h1>
+    <p class="page-hero__lead">
+      Né pendant le protectorat, premier club inscrit à la fédération marocaine, trois fois champion d'Afrique :
+      les grandes époques du club rouge et blanc de Casablanca.
+    </p>
+  </div>
+</section>
+
+<nav class="era-nav" aria-label="Époques">
+  <div class="container">
+    <ul class="era-nav__list">
+      @for (chapter of chapters; track chapter.id) {
+        <li><a class="era-nav__link" routerLink="." [fragment]="chapter.id">{{ chapter.shortLabel }}</a></li>
+      }
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  @for (chapter of chapters; track chapter.id; let odd = $odd, first = $first) {
+    <article class="chapter" [class.chapter--reverse]="odd" [id]="chapter.id" [attr.aria-labelledby]="chapter.id + '-title'">
+      <div class="chapter__media">
+        @if (chapter.image; as image) {
+          <figure>
+            <img [src]="image.src" [alt]="image.alt" [width]="image.width" [height]="image.height" [attr.loading]="first ? 'eager' : 'lazy'">
+            <figcaption>{{ image.caption }}</figcaption>
+          </figure>
+        } @else {
+          <div class="chapter__marker" aria-hidden="true">{{ chapter.marker }}</div>
+        }
+      </div>
+
+      <div class="chapter__text">
+        <span class="chapter__years">{{ chapter.years }}</span>
+        <h2 class="chapter__title" [id]="chapter.id + '-title'">{{ chapter.title }}</h2>
+        @for (paragraph of chapter.paragraphs; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+        @if (chapter.highlight; as highlight) {
+          <div class="highlight">
+            <strong>{{ highlight.title }}</strong>
+            {{ highlight.text }}
+          </div>
+        }
+      </div>
+    </article>
+  }
+</div>

@@ -1,0 +1,44 @@
+﻿name: clubfoot
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: clubfoot
+      POSTGRES_USER: clubfoot
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-clubfoot}
+    ports:
+      # 5433 côté machine pour ne pas entrer en conflit avec un PostgreSQL déjà installé.
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clubfoot -d clubfoot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/clubfoot
+      DB_USERNAME: clubfoot
+      DB_PASSWORD: ${DB_PASSWORD:-clubfoot}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-a-changer-en-production-0123456789}
+    ports:
+      - "8095:8095"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    ports:
+      - "8088:80"
+    depends_on:
+      - api
+
+volumes:
+  db-data:

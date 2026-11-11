@@ -1,0 +1,66 @@
+.shop-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-block: clamp(40px, 6vw, 64px);
+
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    text-transform: uppercase;
+  }
+
+  &__cta {
+    margin-top: 32px;
+  }
+
+  &__banner {
+    border-radius: var(--radius-lg);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.filter {
+  min-height: 40px;
+  padding: 6px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    border-color: var(--ink);
+  }
+
+  &[aria-pressed="true"] {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 0;
+  list-style: none;
+
+  .empty-state {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 960px) {
+  .shop-hero {
+    grid-template-columns: 1fr;
+  }
+}

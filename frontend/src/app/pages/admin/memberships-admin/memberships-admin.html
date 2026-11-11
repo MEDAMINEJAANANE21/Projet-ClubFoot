@@ -1,0 +1,75 @@
+<h2 class="visually-hidden">Demandes d'adhésion</h2>
+
+@if (memberships.errorMessage(); as message) {
+  <p class="alert alert--error" role="alert">{{ message }}</p>
+}
+
+@switch (memberships.state()) {
+  @case ('loading') {
+    <p class="empty-state" role="status">Chargement des demandes…</p>
+  }
+  @case ('error') {
+    <div class="empty-state"><button class="btn btn--outline btn--small" type="button" (click)="memberships.load()">Réessayer</button></div>
+  }
+  @case ('ready') {
+    <div class="admin-filters" role="group" aria-label="Filtrer par statut">
+      @for (filter of filters; track filter.value) {
+        <button class="btn btn--small" type="button"
+                [class.btn--outline]="selectedStatus() !== filter.value"
+                [class.btn--primary]="selectedStatus() === filter.value"
+                [attr.aria-pressed]="selectedStatus() === filter.value"
+                (click)="selectedStatus.set(filter.value)">{{ filter.label }}</button>
+      }
+    </div>
+
+    @if (visibleMemberships().length === 0) {
+      <p class="empty-state">Aucune demande dans cette catégorie.</p>
+    } @else {
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Membre</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Pièces</th>
+              <th scope="col">Statut</th>
+              <th scope="col">Décision</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (membership of visibleMemberships(); track membership.id) {
+              <tr>
+                <td>
+                  <strong>{{ membership.fullName }}</strong>
+                  <span class="muted">{{ genderLabels[membership.gender] }}, né(e) le {{ membership.birthDate | date: 'd MMM y' }}</span>
+                  <span class="muted">Demande du {{ membership.createdAt | date: 'd MMM y' }}</span>
+                </td>
+                <td>
+                  {{ membership.email }}
+                  <span class="muted">{{ membership.phone }}</span>
+                  <span class="muted">{{ membership.address }}, {{ membership.country }}</span>
+                </td>
+                <td>
+                  @for (document of membership.documents; track document) {
+                    <span class="muted">{{ documentLabels[document] }}</span>
+                  }
+                </td>
+                <td><span [class]="'status status--' + statusTones[membership.status]">{{ statusLabels[membership.status] }}</span></td>
+                <td>
+                  @if (membership.status === 'PENDING') {
+                    <div class="actions">
+                      <button class="btn btn--primary btn--small" type="button" (click)="decide(membership, 'APPROVED')">Accepter</button>
+                      <button class="btn btn--outline btn--small" type="button" (click)="decide(membership, 'REJECTED')">Refuser</button>
+                    </div>
+                  } @else {
+                    <button class="btn btn--outline btn--small" type="button" (click)="decide(membership, 'PENDING')">Remettre en attente</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  }
+}

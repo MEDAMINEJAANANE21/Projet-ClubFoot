@@ -1,0 +1,21 @@
+# Systèmes d'exploitation
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.iml
+*.swp
+
+# Variables d'environnement locales (secrets)
+.env
+
+# Backend (Maven)
+backend/target/
+
+# Frontend (Angular)
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/

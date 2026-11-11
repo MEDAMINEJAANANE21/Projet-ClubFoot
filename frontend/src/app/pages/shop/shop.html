@@ -1,0 +1,52 @@
+<section class="section--surface">
+  <div class="container shop-hero">
+    <div>
+      <span class="eyebrow">Nouveautés · saison 2023-2024</span>
+      <h1 class="shop-hero__title">La boutique du Wydad</h1>
+      <p class="section__lead">
+        Les nouveaux maillots sont disponibles : domicile, extérieur, third et une édition limitée pour les 87 ans du club.
+      </p>
+      <a class="btn btn--primary shop-hero__cta" routerLink="." fragment="produits">Voir les produits</a>
+    </div>
+    <img class="shop-hero__banner" src="images/boutique/banniere-boutique.jpg"
+         alt="Logo de l'équipementier Macron à côté de l'écusson du Wydad, sur fond rouge" width="913" height="633">
+  </div>
+</section>
+
+<section class="section" id="produits" aria-labelledby="produits-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="produits-title">Nos meilleures ventes</h2>
+    </div>
+
+    @switch (state()) {
+      @case ('loading') {
+        <p class="empty-state" role="status">Chargement des produits…</p>
+      }
+      @case ('error') {
+        <div class="empty-state" role="alert">
+          <p>{{ errorMessage() }}</p>
+          <button class="btn btn--outline btn--small" type="button" (click)="loadProducts()">Réessayer</button>
+        </div>
+      }
+      @case ('ready') {
+        <div class="filters" role="group" aria-label="Filtrer par catégorie">
+          @for (filter of filters; track filter.value) {
+            <button class="filter" type="button"
+                    [attr.aria-pressed]="selectedCategory() === filter.value"
+                    (click)="selectedCategory.set(filter.value)">{{ filter.label }}</button>
+          }
+        </div>
+        <p class="visually-hidden" role="status">{{ visibleProducts().length }} produit(s) affiché(s).</p>
+
+        <ul class="product-grid">
+          @for (product of visibleProducts(); track product.id) {
+            <li><app-product-card [product]="product" (added)="addToCart($event)" /></li>
+          } @empty {
+            <li class="empty-state">Aucun produit dans cette catégorie.</li>
+          }
+        </ul>
+      }
+    }
+  </div>
+</section>

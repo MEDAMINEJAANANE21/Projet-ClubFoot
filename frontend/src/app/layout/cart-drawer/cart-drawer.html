@@ -1,0 +1,46 @@
+<dialog class="drawer" #dialog aria-labelledby="cart-title" (close)="cart.close()" (click)="onBackdropClick($event)">
+  <div class="drawer__header">
+    <h2 class="drawer__title" id="cart-title">Panier</h2>
+    <button class="icon-button" type="button" aria-label="Fermer le panier" (click)="cart.close()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="drawer__body">
+    @if (cart.isEmpty()) {
+      <p class="drawer__empty">Votre panier est vide.</p>
+    } @else {
+      <ul class="cart-items">
+        @for (item of cart.entries(); track item.productId) {
+          <li class="cart-item">
+            <img class="cart-item__image" [src]="item.imageUrl" alt="" width="64" height="80">
+            <div>
+              <p class="cart-item__name">{{ item.name }}</p>
+              <p class="cart-item__meta">{{ item.color }} · {{ item.price | price }}</p>
+              <div class="quantity">
+                <button type="button" [attr.aria-label]="'Retirer un ' + item.name"
+                        (click)="cart.setQuantity(item.productId, item.quantity - 1)">−</button>
+                <output [attr.aria-label]="'Quantité de ' + item.name">{{ item.quantity }}</output>
+                <button type="button" [attr.aria-label]="'Ajouter un ' + item.name"
+                        [disabled]="item.quantity >= maxQuantity"
+                        (click)="cart.setQuantity(item.productId, item.quantity + 1)">+</button>
+              </div>
+            </div>
+            <button class="cart-item__remove" type="button" [attr.aria-label]="'Retirer ' + item.name + ' du panier'"
+                    (click)="cart.remove(item.productId)">Retirer</button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (!cart.isEmpty()) {
+    <div class="drawer__footer">
+      <p class="drawer__total"><span>Total</span><span>{{ cart.total() | price }}</span></p>
+      <button class="btn btn--primary btn--block" type="button" (click)="checkout()">Passer la commande</button>
+      <button class="btn btn--outline btn--block btn--small" type="button" (click)="cart.clear()">Vider le panier</button>
+    </div>
+  }
+</dialog>

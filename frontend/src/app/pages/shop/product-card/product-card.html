@@ -1,0 +1,17 @@
+@let item = product();
+<article class="product">
+  <img class="product__media" [src]="item.imageUrl" [alt]="item.name + ', ' + item.color" width="240" height="300" loading="lazy">
+  <div class="product__body">
+    @if (item.badge) {
+      <span class="product__badge">{{ item.badge }}</span>
+    }
+    <span class="product__category">{{ categoryLabels[item.category] }} · {{ item.color }}</span>
+    <h3 class="product__name">{{ item.name }}</h3>
+    <div class="product__footer">
+      <span class="product__price">{{ item.price | price }}</span>
+      <button class="btn btn--outline btn--small" type="button"
+              [attr.aria-label]="'Ajouter ' + item.name + ' au panier'"
+              (click)="added.emit(item)">Ajouter</button>
+    </div>
+  </div>
+</article>

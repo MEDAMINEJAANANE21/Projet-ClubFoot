@@ -1,0 +1,141 @@
+.era-nav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 10;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+
+  &__list {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 0;
+    list-style: none;
+    scrollbar-width: thin;
+  }
+
+  &__link {
+    display: block;
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+  }
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(32px, 6vw, 72px);
+  padding-block: clamp(48px, 7vw, 80px);
+  border-bottom: 1px solid var(--line);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &--reverse &__media {
+    order: 2;
+  }
+
+  &__years {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  &__title {
+    margin-top: 4px;
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    text-transform: uppercase;
+  }
+
+  &__text p + p {
+    margin-top: 16px;
+  }
+
+  &__media {
+    figure {
+      position: sticky;
+      top: calc(var(--header-height) + 80px);
+    }
+
+    img {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+
+    figcaption {
+      margin-top: 12px;
+      padding-left: 12px;
+      border-left: 3px solid var(--red);
+      font-size: 0.9375rem;
+      color: var(--muted);
+    }
+  }
+
+  &__marker {
+    display: grid;
+    place-items: center;
+    min-height: 260px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--red);
+  }
+}
+
+.highlight {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  background: var(--red-soft);
+
+  strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    color: var(--red-dark);
+  }
+}
+
+@media (max-width: 860px) {
+  .chapter {
+    grid-template-columns: 1fr;
+
+    &--reverse .chapter__media {
+      order: 0;
+    }
+
+    &__media {
+      figure {
+        position: static;
+      }
+
+      img {
+        max-height: 420px;
+        object-fit: cover;
+      }
+    }
+
+    &__marker {
+      min-height: 160px;
+    }
+  }
+}

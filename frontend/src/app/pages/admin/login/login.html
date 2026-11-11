@@ -1,0 +1,41 @@
+<section class="section section--surface login">
+  <div class="container">
+    <form class="form login__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div>
+        <span class="eyebrow">Espace admin</span>
+        <h1 class="login__title">Connexion</h1>
+      </div>
+
+      @if (expiree()) {
+        <p class="alert alert--error" role="status">Votre session a expiré. Reconnectez-vous.</p>
+      }
+
+      <div class="field">
+        <label for="username">Identifiant</label>
+        <input id="username" formControlName="username" type="text" autocomplete="username"
+               [attr.aria-invalid]="isInvalid(form.controls.username)" aria-describedby="username-error">
+        @if (errorOf(form.controls.username); as message) {
+          <p class="field__error" id="username-error">{{ message }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" formControlName="password" type="password" autocomplete="current-password"
+               [attr.aria-invalid]="isInvalid(form.controls.password)" aria-describedby="password-error">
+        @if (errorOf(form.controls.password); as message) {
+          <p class="field__error" id="password-error">{{ message }}</p>
+        }
+      </div>
+
+      <div class="form__actions">
+        <button class="btn btn--primary btn--block" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Connexion…' : 'Se connecter' }}
+        </button>
+        @if (errorText(); as message) {
+          <p class="alert alert--error" role="alert">{{ message }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</section>

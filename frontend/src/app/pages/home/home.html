@@ -1,0 +1,73 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <h1 class="hero__title" id="hero-title">Wydad<br><span>Athletic</span><br>Club</h1>
+    <p class="hero__lead">
+      Fondé en 1937 à Casablanca, le Wydad est le club le plus titré du Maroc
+      et l'un des grands noms du football africain.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" routerLink="/histoire">Découvrir son histoire</a>
+      <a class="btn btn--light" routerLink="/adhesion">Devenir membre</a>
+    </div>
+  </div>
+</section>
+
+<section class="stats" aria-labelledby="stats-title">
+  <div class="container">
+    <h2 class="visually-hidden" id="stats-title">Palmarès</h2>
+    <ul class="stats__list">
+      @for (trophy of trophies; track trophy.label) {
+        <li class="stats__item">
+          <span class="stats__value">{{ trophy.count }}</span>
+          <span class="stats__label">{{ trophy.label }}</span>
+        </li>
+      }
+    </ul>
+    <p class="stats__note">Principaux trophées, à la fin de la saison 2023-2024.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="explore-title">
+  <div class="container">
+    <div class="section__header">
+      <span class="eyebrow">Explorer</span>
+      <h2 class="section__title" id="explore-title">Le Wydad en trois pages</h2>
+      <p class="section__lead">Près de 90 ans d'histoire, les maillots de la saison et l'adhésion au club.</p>
+    </div>
+
+    <div class="cards">
+      <a class="card" routerLink="/histoire">
+        <img class="card__media" src="images/histoire/equipe-1939-1940.webp" alt="" width="300" height="196" loading="lazy">
+        <div class="card__body">
+          <h3 class="card__title">Histoire</h3>
+          <p class="card__text">Des résistants de 1937 aux titres africains de 2017 et 2022 : les grandes époques du club.</p>
+          <span class="card__more">Lire l'histoire →</span>
+        </div>
+      </a>
+      <a class="card" routerLink="/boutique">
+        <img class="card__media" src="images/boutique/maillot-domicile.jpeg" alt="" width="201" height="251" loading="lazy">
+        <div class="card__body">
+          <h3 class="card__title">Boutique</h3>
+          <p class="card__text">Maillots domicile, extérieur et third, polos et sweats aux couleurs rouge et blanc.</p>
+          <span class="card__more">Voir la boutique →</span>
+        </div>
+      </a>
+      <a class="card card--accent" routerLink="/adhesion">
+        <span class="card__big-number" aria-hidden="true">1937</span>
+        <div class="card__body">
+          <h3 class="card__title">Adhésion</h3>
+          <p class="card__text">Rejoignez la famille rouge et blanche en remplissant le formulaire d'adhésion en ligne.</p>
+          <span class="card__more">Devenir membre →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="quote" aria-label="Devise du club">
+  <div class="container">
+    <blockquote>
+      <p>Porter le maillot du Wydad est un honneur, <span>le mouiller est un devoir.</span></p>
+    </blockquote>
+  </div>
+</section>

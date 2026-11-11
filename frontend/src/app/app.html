@@ -1,0 +1,11 @@
+<a class="skip-link" href="#contenu" (click)="skipToContent($event)">Aller au contenu</a>
+
+<app-header />
+
+<main id="contenu" tabindex="-1" #main>
+  <router-outlet />
+</main>
+
+<app-footer />
+<app-cart-drawer />
+<app-toast />

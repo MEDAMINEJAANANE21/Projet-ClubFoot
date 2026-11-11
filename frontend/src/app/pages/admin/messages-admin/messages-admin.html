@@ -1,0 +1,36 @@
+<h2 class="visually-hidden">Messages de contact</h2>
+
+@if (messages.errorMessage(); as message) {
+  <p class="alert alert--error" role="alert">{{ message }}</p>
+}
+
+@switch (messages.state()) {
+  @case ('loading') {
+    <p class="empty-state" role="status">Chargement des messages…</p>
+  }
+  @case ('error') {
+    <div class="empty-state"><button class="btn btn--outline btn--small" type="button" (click)="messages.load()">Réessayer</button></div>
+  }
+  @case ('ready') {
+    <p class="summary">{{ messages.items().length }} message(s), dont <strong>{{ unreadCount() }} non lu(s)</strong>.</p>
+
+    @for (message of messages.items(); track message.id) {
+      <article class="message" [class.message--unread]="!message.read">
+        <header class="message__header">
+          <div>
+            <h3 class="message__subject">{{ subjectLabels[message.subject] }}</h3>
+            <p class="message__meta">{{ message.name }} · {{ message.email }} · {{ message.createdAt | date: 'd MMM y, HH:mm' }}</p>
+          </div>
+          @if (message.read) {
+            <span class="status status--success">Lu</span>
+          } @else {
+            <button class="btn btn--outline btn--small" type="button" (click)="markAsRead(message)">Marquer comme lu</button>
+          }
+        </header>
+        <p class="message__body">{{ message.message }}</p>
+      </article>
+    } @empty {
+      <p class="empty-state">Aucun message pour le moment.</p>
+    }
+  }
+}

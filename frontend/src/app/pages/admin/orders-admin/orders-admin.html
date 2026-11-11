@@ -1,0 +1,68 @@
+<h2 class="visually-hidden">Commandes</h2>
+
+@if (orders.errorMessage(); as message) {
+  <p class="alert alert--error" role="alert">{{ message }}</p>
+}
+
+@switch (orders.state()) {
+  @case ('loading') {
+    <p class="empty-state" role="status">Chargement des commandes…</p>
+  }
+  @case ('error') {
+    <div class="empty-state"><button class="btn btn--outline btn--small" type="button" (click)="orders.load()">Réessayer</button></div>
+  }
+  @case ('ready') {
+    @if (orders.items().length === 0) {
+      <p class="empty-state">Aucune commande pour le moment.</p>
+    } @else {
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Référence</th>
+              <th scope="col">Client</th>
+              <th scope="col">Articles</th>
+              <th scope="col">Total</th>
+              <th scope="col">Statut</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (order of orders.items(); track order.id) {
+              <tr>
+                <td>
+                  <strong>{{ order.reference }}</strong>
+                  <span class="muted">{{ order.createdAt | date: 'd MMM y, HH:mm' }}</span>
+                </td>
+                <td>
+                  {{ order.customerName }}
+                  <span class="muted">{{ order.email }} · {{ order.phone }}</span>
+                  <span class="muted">{{ order.address }}, {{ order.city }}</span>
+                </td>
+                <td>
+                  {{ itemCount(order) }} article(s)
+                  @for (line of order.lines; track line.productId) {
+                    <span class="muted">{{ line.quantity }} × {{ line.productName }}</span>
+                  }
+                </td>
+                <td class="nowrap"><strong>{{ order.total | price }}</strong></td>
+                <td><span [class]="'status status--' + statusTones[order.status]">{{ statusLabels[order.status] }}</span></td>
+                <td>
+                  <div class="actions">
+                    @for (next of nextStatuses[order.status]; track next) {
+                      <button class="btn btn--outline btn--small" type="button" (click)="changeStatus(order, next)">
+                        {{ actionLabels[next] }}
+                      </button>
+                    } @empty {
+                      <span class="muted">—</span>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  }
+}
