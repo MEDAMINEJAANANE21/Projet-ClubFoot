@@ -1,8 +1,7 @@
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow">Contact</span>
     <h1 class="page-hero__title">Nous écrire</h1>
-    <p class="page-hero__lead">Un bug sur le site, une question sur la boutique ou une idée ? Écrivez à l'équipe du site.</p>
+    <p class="page-hero__lead">Un bug sur le site, une question sur la boutique ou une idée ? Écrivez à l'équipe du site</p>
   </div>
 </section>
 
@@ -61,7 +60,7 @@
                     [attr.aria-invalid]="isInvalid(form.controls.message)"
                     aria-describedby="message-hint message-error"></textarea>
           <p class="field__hint" id="message-hint">
-            {{ messageMinLength }} caractères minimum ({{ form.controls.message.value.length }} saisis).
+            {{ messageMinLength }} caractères minimum ({{ form.controls.message.value.length }} saisis)
           </p>
           @if (errorOf(form.controls.message); as message) {
             <p class="field__error" id="message-error">{{ message }}</p>

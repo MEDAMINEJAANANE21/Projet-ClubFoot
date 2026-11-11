@@ -72,7 +72,7 @@ export class MembershipPage {
         next: (membership) => {
           this.status.set({
             type: 'success',
-            message: `Merci ${membership.fullName} ! Votre demande d'adhésion n° ${membership.id} est enregistrée. Le club vous recontactera.`,
+            message: `Demande n° ${membership.id} enregistrée, ${membership.fullName}. Le club vous recontactera.`,
           });
           this.form.reset();
           this.isSubmitting.set(false);

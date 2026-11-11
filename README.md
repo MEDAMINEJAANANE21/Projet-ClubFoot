@@ -9,6 +9,9 @@ Application web complète autour du **Wydad Athletic Club** de Casablanca : hist
 ![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+[![CI](https://github.com/MEDAMINEJAANANE21/Projet-ClubFoot/actions/workflows/ci.yml/badge.svg)](https://github.com/MEDAMINEJAANANE21/Projet-ClubFoot/actions/workflows/ci.yml)
+
+**Documentation complète : [docs/](docs/README.md)** (architecture, backend, frontend, API, design, déploiement, guide du développeur)
 
 ![Page d'accueil](docs/screenshots/accueil.png)
 
@@ -26,6 +29,7 @@ Application web complète autour du **Wydad Athletic Club** de Casablanca : hist
 - [Choix techniques](#choix-techniques)
 - [Structure du projet](#structure-du-projet)
 - [Historique du projet](#historique-du-projet)
+- [Documentation](#documentation)
 - [Avertissement](#avertissement)
 
 ## Fonctionnalités
@@ -189,7 +193,8 @@ Les erreurs suivent le standard **RFC 9457 (Problem Details)** :
 - **Instantané des prix** : une ligne de commande garde le nom et le prix du produit au moment de l'achat.
 - **Règles métier dans le domaine** : `OrderStatus.canTransitionTo()` interdit par exemple d'expédier une commande non confirmée.
 - **Validation** : Bean Validation sur les DTO (records Java), plus une contrainte personnalisée `@AgeRange`.
-- **Sécurité** : API sans état, JWT signé en HS256 via Spring Security OAuth2 Resource Server, mots de passe hachés (BCrypt), CORS configurable.
+- **Sécurité** : API sans état, JWT signé en HS256 via Spring Security OAuth2 Resource Server, mots de passe hachés (BCrypt).
+- **Liaison front/back par proxy** : le navigateur appelle toujours `/api` sur l'adresse du site. `ng serve` (en développement) ou nginx (avec Docker) relaie vers l'API, donc pas besoin de CORS.
 - **Schéma versionné** avec Flyway ; Hibernate valide le schéma au démarrage (`ddl-auto: validate`).
 - **Problème N+1 évité** avec `@EntityGraph` sur les listes de commandes et d'adhésions.
 
@@ -217,7 +222,7 @@ Les erreurs suivent le standard **RFC 9457 (Problem Details)** :
 │   ├── src/main/java/com/clubfoot/api/
 │   │   ├── auth/                 Connexion et émission du JWT
 │   │   ├── common/               Gestion des erreurs, validations communes
-│   │   ├── config/               Sécurité, CORS, OpenAPI, propriétés
+│   │   ├── config/               Sécurité, OpenAPI, propriétés
 │   │   ├── contact/              Messages de contact
 │   │   ├── membership/           Demandes d'adhésion
 │   │   ├── order/                Commandes et lignes de commande
@@ -232,7 +237,7 @@ Les erreurs suivent le standard **RFC 9457 (Problem Details)** :
 │   │   └── shared/               Validateurs, libellés, formatage des prix
 │   ├── nginx.conf
 │   └── Dockerfile
-├── docs/screenshots/
+├── docs/                         Documentation technique et captures d'écran
 ├── .github/workflows/ci.yml      Intégration continue
 └── docker-compose.yml
 ```
@@ -243,6 +248,18 @@ Les erreurs suivent le standard **RFC 9457 (Problem Details)** :
 | --- | --- |
 | **v1** — 1<sup>re</sup> année de MIAGE (Maroc) | Site statique en HTML et CSS : 5 pages, sans interactivité. |
 | **v2** — refonte complète | Application Angular, API Spring Boot, base PostgreSQL, espace admin, tests automatisés, Docker et CI. |
+
+## Documentation
+
+| Document | Contenu |
+| --- | --- |
+| [Architecture](docs/architecture.md) | Vue d'ensemble, parcours d'une requête, patterns |
+| [Backend](docs/backend.md) | Couches, modèle de données, validation, sécurité, tests |
+| [Frontend](docs/frontend.md) | Structure, routes, état, formulaires, tests |
+| [API REST](docs/api.md) | Routes avec exemples de requêtes et de réponses |
+| [Design](docs/design.md) | Direction visuelle, couleurs, typographie |
+| [Déploiement](docs/deploiement.md) | Docker, proxy, variables d'environnement, CI |
+| [Guide du développeur](docs/guide-developpeur.md) | Installation, conventions, ajouter une fonctionnalité |
 
 ## Avertissement
 

@@ -13,7 +13,7 @@
   <div class="container">
     <ul class="era-nav__list">
       @for (chapter of chapters; track chapter.id) {
-        <li><a class="era-nav__link" routerLink="." [fragment]="chapter.id">{{ chapter.shortLabel }}</a></li>
+        <li><a class="era-nav__link figure" routerLink="." [fragment]="chapter.id">{{ chapter.shortLabel }}</a></li>
       }
     </ul>
   </div>
@@ -29,20 +29,20 @@
             <figcaption>{{ image.caption }}</figcaption>
           </figure>
         } @else {
-          <div class="chapter__marker" aria-hidden="true">{{ chapter.marker }}</div>
+          <div class="chapter__marker figure" aria-hidden="true">{{ chapter.marker }}</div>
         }
       </div>
 
       <div class="chapter__text">
-        <span class="chapter__years">{{ chapter.years }}</span>
+        <span class="chapter__years figure">{{ chapter.years }}</span>
         <h2 class="chapter__title" [id]="chapter.id + '-title'">{{ chapter.title }}</h2>
         @for (paragraph of chapter.paragraphs; track $index) {
           <p>{{ paragraph }}</p>
         }
         @if (chapter.highlight; as highlight) {
           <div class="highlight">
-            <strong>{{ highlight.title }}</strong>
-            {{ highlight.text }}
+            <strong class="figure">{{ highlight.title }}</strong>
+            <span>{{ highlight.text }}</span>
           </div>
         }
       </div>

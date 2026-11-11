@@ -61,7 +61,7 @@ export class Contact {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          this.status.set({ type: 'success', message: 'Merci ! Votre message a bien été envoyé à l’équipe du site.' });
+          this.status.set({ type: 'success', message: 'Message envoyé à l’équipe du site' });
           this.form.reset();
           this.isSubmitting.set(false);
         },

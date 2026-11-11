@@ -1,8 +1,7 @@
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow">Boutique</span>
     <h1 class="page-hero__title">Ma commande</h1>
-    <p class="page-hero__lead">Vérifiez votre panier et indiquez votre adresse de livraison.</p>
+    <p class="page-hero__lead">Vérifiez votre panier et indiquez votre adresse de livraison</p>
   </div>
 </section>
 
@@ -10,21 +9,21 @@
   <div class="container">
     @if (confirmedOrder(); as order) {
       <div class="confirmation" role="status">
-        <span class="eyebrow">Commande enregistrée</span>
-        <h2 class="confirmation__title">Merci, {{ order.customerName }} !</h2>
-        <p>Votre numéro de commande : <strong class="confirmation__reference">{{ order.reference }}</strong></p>
+        <h2 class="confirmation__title">Commande enregistrée</h2>
+        <p class="confirmation__text">Merci {{ order.customerName }}. Votre numéro de commande :</p>
+        <p class="confirmation__reference figure">{{ order.reference }}</p>
         <ul class="summary__lines">
           @for (line of order.lines; track line.productId) {
-            <li><span>{{ line.quantity }} × {{ line.productName }}</span><span>{{ line.subtotal | price }}</span></li>
+            <li><span>{{ line.quantity }} × {{ line.productName }}</span><span class="figure">{{ line.subtotal | price }}</span></li>
           }
         </ul>
-        <p class="summary__total"><span>Total</span><span>{{ order.total | price }}</span></p>
-        <p class="confirmation__note">Démo : aucun paiement n'est demandé et rien ne sera livré.</p>
+        <p class="summary__total"><span>Total</span><span class="figure">{{ order.total | price }}</span></p>
+        <p class="confirmation__note">Démo : aucun paiement n'est demandé et rien ne sera livré</p>
         <a class="btn btn--primary" routerLink="/boutique">Retour à la boutique</a>
       </div>
     } @else if (cart.isEmpty()) {
       <div class="empty-state">
-        <p>Votre panier est vide.</p>
+        <p>Votre panier est vide</p>
         <a class="btn btn--primary" routerLink="/boutique">Voir la boutique</a>
       </div>
     } @else {
@@ -33,10 +32,10 @@
           <h2 id="summary-title">Récapitulatif</h2>
           <ul class="summary__lines">
             @for (item of cart.entries(); track item.productId) {
-              <li><span>{{ item.quantity }} × {{ item.name }}</span><span>{{ item.price * item.quantity | price }}</span></li>
+              <li><span>{{ item.quantity }} × {{ item.name }}</span><span class="figure">{{ item.price * item.quantity | price }}</span></li>
             }
           </ul>
-          <p class="summary__total"><span>Total</span><span>{{ cart.total() | price }}</span></p>
+          <p class="summary__total"><span>Total</span><span class="figure">{{ cart.total() | price }}</span></p>
           <button class="btn btn--outline btn--small" type="button" (click)="cart.open()">Modifier le panier</button>
         </aside>
 

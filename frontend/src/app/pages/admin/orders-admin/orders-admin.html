@@ -13,7 +13,7 @@
   }
   @case ('ready') {
     @if (orders.items().length === 0) {
-      <p class="empty-state">Aucune commande pour le moment.</p>
+      <p class="empty-state">Aucune commande pour le moment</p>
     } @else {
       <div class="table-wrapper">
         <table class="data-table">
@@ -31,7 +31,7 @@
             @for (order of orders.items(); track order.id) {
               <tr>
                 <td>
-                  <strong>{{ order.reference }}</strong>
+                  <strong class="nowrap">{{ order.reference }}</strong>
                   <span class="muted">{{ order.createdAt | date: 'd MMM y, HH:mm' }}</span>
                 </td>
                 <td>

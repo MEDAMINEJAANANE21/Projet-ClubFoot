@@ -1,7 +1,7 @@
 <section class="section--surface">
   <div class="container shop-hero">
     <div>
-      <span class="eyebrow">Nouveautés · saison 2023-2024</span>
+      <span class="eyebrow">Saison 2023-2024</span>
       <h1 class="shop-hero__title">La boutique du Wydad</h1>
       <p class="section__lead">
         Les nouveaux maillots sont disponibles : domicile, extérieur, third et une édition limitée pour les 87 ans du club.
@@ -15,8 +15,17 @@
 
 <section class="section" id="produits" aria-labelledby="produits-title">
   <div class="container">
-    <div class="section__header">
-      <h2 class="section__title" id="produits-title">Nos meilleures ventes</h2>
+    <div class="shop-toolbar">
+      <h2 class="section__title" id="produits-title">Collection 2023-2024</h2>
+      @if (state() === 'ready') {
+        <div class="filters" role="group" aria-label="Filtrer par catégorie">
+          @for (filter of filters; track filter.value) {
+            <button class="filter" type="button"
+                    [attr.aria-pressed]="selectedCategory() === filter.value"
+                    (click)="selectedCategory.set(filter.value)">{{ filter.label }}</button>
+          }
+        </div>
+      }
     </div>
 
     @switch (state()) {
@@ -30,20 +39,13 @@
         </div>
       }
       @case ('ready') {
-        <div class="filters" role="group" aria-label="Filtrer par catégorie">
-          @for (filter of filters; track filter.value) {
-            <button class="filter" type="button"
-                    [attr.aria-pressed]="selectedCategory() === filter.value"
-                    (click)="selectedCategory.set(filter.value)">{{ filter.label }}</button>
-          }
-        </div>
-        <p class="visually-hidden" role="status">{{ visibleProducts().length }} produit(s) affiché(s).</p>
+        <p class="visually-hidden" role="status">{{ visibleProducts().length }} produit(s) affiché(s)</p>
 
         <ul class="product-grid">
           @for (product of visibleProducts(); track product.id) {
             <li><app-product-card [product]="product" (added)="addToCart($event)" /></li>
           } @empty {
-            <li class="empty-state">Aucun produit dans cette catégorie.</li>
+            <li class="empty-state">Aucun produit dans cette catégorie</li>
           }
         </ul>
       }

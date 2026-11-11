@@ -4,5 +4,5 @@ export interface FormStatus {
 }
 
 export function invalidFormStatus(): FormStatus {
-  return { type: 'error', message: 'Certains champs sont à corriger.' };
+  return { type: 'error', message: 'Certains champs sont à corriger' };
 }

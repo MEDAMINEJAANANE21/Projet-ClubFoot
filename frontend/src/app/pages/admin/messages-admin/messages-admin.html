@@ -12,7 +12,7 @@
     <div class="empty-state"><button class="btn btn--outline btn--small" type="button" (click)="messages.load()">Réessayer</button></div>
   }
   @case ('ready') {
-    <p class="summary">{{ messages.items().length }} message(s), dont <strong>{{ unreadCount() }} non lu(s)</strong>.</p>
+    <p class="summary">{{ messages.items().length }} message(s), dont <strong>{{ unreadCount() }} non lu(s)</strong></p>
 
     @for (message of messages.items(); track message.id) {
       <article class="message" [class.message--unread]="!message.read">
@@ -30,7 +30,7 @@
         <p class="message__body">{{ message.message }}</p>
       </article>
     } @empty {
-      <p class="empty-state">Aucun message pour le moment.</p>
+      <p class="empty-state">Aucun message pour le moment</p>
     }
   }
 }

@@ -29,7 +29,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       alt: 'Portrait de Mohamed Benjelloun Touimi',
       width: 290,
       height: 290,
-      caption: 'Mohamed Benjelloun Touimi, fondateur et premier président du Wydad.',
+      caption: 'Mohamed Benjelloun Touimi, fondateur et premier président du Wydad',
     },
     paragraphs: [
       "Le Wydad Athletic Club, aussi appelé Wydad ou WAC, est fondé en 1937 à Casablanca, pendant le protectorat français. Ses créateurs sont un groupe d'intellectuels et de jeunes résistants, parmi lesquels feu Mohamed Benjelloun Touimi.",
@@ -47,13 +47,13 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       alt: "Photo d'équipe du Wydad, en noir et blanc, lors de la saison 1939-1940",
       width: 300,
       height: 196,
-      caption: "L'équipe du Wydad lors de sa première saison, en 1939-1940.",
+      caption: "L'équipe du Wydad lors de sa première saison, en 1939-1940",
     },
     paragraphs: [
       "Le club monte vite. Il accède à la première division du championnat marocain dès 1942 et remporte son premier grand titre en 1948, qu'il conserve pendant quatre saisons.",
       "Sur la même période, le Wydad domine aussi le football maghrébin : trois Championnats d'Afrique du Nord, deux Supercoupes d'Afrique du Nord et une Coupe d'Afrique du Nord.",
     ],
-    highlight: { title: '4 titres de suite', text: 'Champion du Maroc chaque saison de 1948 à 1951.' },
+    highlight: { title: '4 titres de suite', text: 'Champion du Maroc chaque saison de 1948 à 1951' },
   },
   {
     id: 'independance',
@@ -68,7 +68,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
     ],
     highlight: {
       title: '9 Coupes du Trône',
-      text: 'Après celle de 1970, le club en gagne huit autres. La dernière date de 2001.',
+      text: 'Huit autres après celle de 1970, la dernière en 2001',
     },
   },
   {
@@ -81,7 +81,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       alt: 'Larbi Aherdane porte le trophée de la Coupe Mohammed V, entouré de joueurs',
       width: 565,
       height: 357,
-      caption: 'Larbi Aherdane porte le trophée de la Coupe Mohammed V, en 1979.',
+      caption: 'Larbi Aherdane porte le trophée de la Coupe Mohammed V, en 1979',
     },
     paragraphs: [
       'Avec ses titres nationaux et maghrébins, le Wydad voit plus grand. Il affronte de grands clubs étrangers, notamment lors de la Coupe Mohammed V, un tournoi international organisé à Casablanca.',
@@ -89,7 +89,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
     ],
     highlight: {
       title: 'Vainqueur en 1979',
-      text: "Seul club hors d'Europe et d'Amérique latine à avoir remporté la Coupe Mohammed V, disparue en 1989.",
+      text: "Seul club hors d'Europe et d'Amérique latine à avoir remporté la Coupe Mohammed V, disparue en 1989",
     },
   },
   {
@@ -102,7 +102,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       alt: "Fakhreddine Rajhi soulève la Coupe d'Afrique des clubs champions",
       width: 500,
       height: 362,
-      caption: "Fakhreddine Rajhi soulève la Coupe d'Afrique des clubs champions, en 1992.",
+      caption: "Fakhreddine Rajhi soulève la Coupe d'Afrique des clubs champions, en 1992",
     },
     paragraphs: [
       'Entre 1989 et 1993, le club vit sa première grande période de succès. Il remporte trois championnats, une Coupe du Trône, une Ligue des champions arabe et une Supercoupe arabe.',
@@ -134,7 +134,7 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       alt: 'Abdelilah Akram et Said Naciri assis à une table de conférence devant le logo du club',
       width: 600,
       height: 360,
-      caption: 'Abdelilah Akram (à gauche) et Said Naciri, son successeur à la présidence en 2014.',
+      caption: 'Abdelilah Akram (à gauche) et Said Naciri, son successeur à la présidence en 2014',
     },
     paragraphs: [
       'En 2014, Said Naciri est élu président. Il succède à Abdelilah Akram, poussé au départ par le boycott des supporters, qui critiquaient sa gestion.',
@@ -142,6 +142,6 @@ export const HISTORY_CHAPTERS: readonly Chapter[] = [
       "La première est gagnée en 2017 avec Houcine Ammouta. La seconde en 2022 avec Walid Regragui, qui prend ensuite la tête de l'équipe nationale et emmène le Maroc en demi-finale de la Coupe du monde 2022 au Qatar.",
       'Fin 2023, Said Naciri quitte la présidence. En 2025, le Wydad représente le Maroc à la Coupe du monde des clubs de la FIFA, aux États-Unis.',
     ],
-    highlight: { title: '3 Ligues des champions', text: '1992, 2017 et 2022.' },
+    highlight: { title: '3 Ligues des champions', text: '1992, 2017 et 2022' },
   },
 ];
