@@ -30,10 +30,14 @@ public class AgeRangeValidator implements ConstraintValidator<AgeRange, LocalDat
     @Override
     public boolean isValid(LocalDate birthDate, ConstraintValidatorContext context) {
         // Le cas null est laissé à @NotNull, pour n'afficher qu'un seul message.
-        if (birthDate == null) {
-            return true;
+        return birthDate == null || isAgeBetween(birthDate, LocalDate.now(clock), minAge, maxAge);
+    }
+
+    static boolean isAgeBetween(LocalDate birthDate, LocalDate today, int minAge, int maxAge) {
+        if (birthDate.isAfter(today)) {
+            return false;
         }
-        int age = Period.between(birthDate, LocalDate.now(clock)).getYears();
-        return !birthDate.isAfter(LocalDate.now(clock)) && age >= minAge && age <= maxAge;
+        int age = Period.between(birthDate, today).getYears();
+        return age >= minAge && age <= maxAge;
     }
 }
